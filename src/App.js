@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import CharacterForm from './components/CharacterForm';
-import CharacterList from './components/CharacterList';
-import axios from 'axios';
-import './index.css';
+import React, { useState, useEffect } from "react";
+import CharacterForm from "./components/CharacterForm";
+import CharacterList from "./components/CharacterList";
+import axios from "axios";
+import "./index.css";
 
-const apiurl ="http://localhost:3000"
+const apiurl = "https://marvel-api-nxcl.onrender.com";
 
 const App = () => {
   const [characters, setCharacters] = useState([]);
@@ -17,9 +17,10 @@ const App = () => {
   const fetchCharacters = async () => {
     try {
       const response = await axios.get(`${apiurl}/characters`);
+      console.log(response);
       setCharacters(response.data);
     } catch (error) {
-      console.error('Error fetching characters:', error);
+      console.error("Error fetching characters:", error);
     }
   };
 
@@ -27,8 +28,9 @@ const App = () => {
     try {
       const response = await axios.post(`${apiurl}/characters`, character);
       setCharacters((prev) => [...prev, response.data]);
+      console.log(response);
     } catch (error) {
-      console.error('Error adding character:', error);
+      console.error("Error adding character:", error);
     }
   };
 
